@@ -4,7 +4,7 @@
     "slug": " ",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/logo-white.png",
+    "icon": "./assets/images/logo-color.png",
     "scheme": "bankr",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
@@ -13,7 +13,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo-white.png",
+        "foregroundImage": "./assets/images/logo-color.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true

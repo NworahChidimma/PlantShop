@@ -1,9 +1,15 @@
- import { Text, View , Image, TextInput, TouchableOpacity, ScrollView, Dimensions, Button} from "react-native";
+ import { Text, View , Image, TextInput, TouchableOpacity, ScrollView, Dimensions, Button, Pressable} from "react-native";
  import { SafeAreaView } from "react-native-safe-area-context";
+ import { router } from "expo-router";
+ import { useState, useEffect } from "react";
+ import TextButton from "../components/button"
+ import Feather from '@expo/vector-icons/Feather';
+
 
 export default function Index() {
 
   const {width, height} = Dimensions.get('screen')
+  const [passwordVisible, setPasswordVisible]= useState(false)
   return (
     <SafeAreaView style={{flex:1,backgroundColor:"white", paddingHorizontal:width*0.06}}>
       <Image 
@@ -20,7 +26,7 @@ export default function Index() {
           Email Address
           </Text>
 
-          <TextInput placeholder="Enter your email address" placeholderTextColor={"gray"}
+          <TextInput keyboardType="email-address" placeholder="Enter your email address" placeholderTextColor={"gray"}
           style={{borderWidth:1, borderColor:"gray",height:height*.06, marginTop:7, borderRadius:10, paddingLeft:10}}>
           </TextInput>
 
@@ -28,9 +34,18 @@ export default function Index() {
             Password
           </Text>
 
-           <TextInput placeholder="Enter your Password" placeholderTextColor={"gray"}
+           <TextInput secureTextEntry={!passwordVisible} placeholder="Enter your Password" placeholderTextColor={"gray"}
           style={{borderWidth:1, borderColor:"gray",height:height*.06, marginTop:7, borderRadius:10, paddingLeft:10}}>
           </TextInput>
+
+          <TouchableOpacity onPress={() => {
+
+            setPasswordVisible(!passwordVisible)
+
+          }} style={{bottom:height*.046, left:width*.78}}>
+          <Text  style={{color:"black"}}>{passwordVisible ? <Feather name="eye" size={24} color="black" /> : <Feather name="eye-off" size={24} color="black" />}</Text>
+          </TouchableOpacity>
+          
 
           <TouchableOpacity>
             <Text style={{ color:"#757575", textAlign:"right", marginTop:15, fontSize:17, fontWeight:"semibold"}}>
@@ -41,9 +56,10 @@ export default function Index() {
           <View style={{flexDirection:"row", flexWrap:"wrap", marginTop:20}}>
       
             <Text style={{ fontSize:15, color:"gray"}}>I've read and agreed to</Text>
-            <TouchableOpacity><Text style={{marginStart:2, fontSize:15, color:"#004643", fontWeight:'500'}}>User Agreement</Text></TouchableOpacity>
+            <TextButton text={"User Agreement"}/>
             <Text style={{marginStart:2, fontSize:15, color:"gray"}}>and</Text>
-            <TouchableOpacity><Text style={{marginStart:2, fontSize:15, color:"#004643", fontWeight:"500"}}>Privacy Policy</Text></TouchableOpacity>
+            <TextButton text={"Privacy Policy"}/>
+           
           </View>
 
           
@@ -52,6 +68,26 @@ export default function Index() {
               Sign in
             </Text>
            </TouchableOpacity>
+
+           <TouchableOpacity>
+            <Text style={{color:"gray", textAlign:"center", marginTop:17}}> 
+              other way to sign in
+            </Text>
+           </TouchableOpacity>
+
+           <View style={{flex:1, flexDirection:"row", alignSelf:"center", marginTop:20, }}>
+            <TouchableOpacity>
+            <Image style={{marginRight:10}} source={require("../assets/images/google-icon.png")}></Image>
+            </TouchableOpacity>
+            <TouchableOpacity>
+            <Image source={require("../assets/images/facebook-icon.png")}></Image>
+            </TouchableOpacity>
+           </View>
+
+           <View style={{flex:1, flexDirection:"row", marginTop:50, alignSelf:"center"}}>
+            <Text>Don't have an account?</Text>
+            <TextButton onPress={()=> router.push("./sign-up")} text={"Create Account"}/>
+           </View>
           
 
     </SafeAreaView>
